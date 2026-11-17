@@ -9,7 +9,7 @@ Neon Postgres resource `happy-gate-db` added, Render removed from the code.
 
 1. [ ] **Vercel: finish the deploy** (owner)
    - Project → Settings → Environment Variables: `KITCHEN_TOKEN` (long random string), `RESEND_API_KEY`,
-     `RESTAURANT_EMAIL`, `FROM_EMAIL`, `RESTAURANT_TIMEZONE=Europe/Amsterdam`. `DATABASE_URL` is already injected by Neon.
+     `FROM_EMAIL`, `RESTAURANT_TIMEZONE=Europe/Amsterdam`. `DATABASE_URL` is already injected by Neon.
    - Redeploy, then note the project URL (`https://….vercel.app`). The default name `happy-gate-food-ordering.vercel.app`
      returned DEPLOYMENT_NOT_FOUND, so the real URL is different or the first deploy has not run yet.
    - Check that the GitHub repo is connected so pushes to `master` deploy automatically.
@@ -25,7 +25,7 @@ Neon Postgres resource `happy-gate-db` added, Render removed from the code.
    Settings → *Test print* from the phone on the restaurant Wi‑Fi
 9. [ ] **Phone setup**: "New orders" channel sound on, battery optimisation off for the app, consider a Do Not Disturb exception
 10. [ ] **End-to-end test**: order on the website → phone rings → accept 30 min → customer email shows the time →
-    ticket prints → mark ready → customer email "ready"
+    ticket prints → mark ready
 
 ## Hardening (plan phase 5)
 
@@ -35,7 +35,7 @@ Neon Postgres resource `happy-gate-db` added, Render removed from the code.
 - [ ] Persist "already alerted" order ids so a restart does not re-ring for old pending orders
 - [ ] Rotate `KITCHEN_TOKEN` procedure; consider per-device tokens so one phone can be revoked
 - [ ] Backend: remove stale `device_tokens` not seen for 60+ days
-- [ ] Backend: order total currency symbol in `printer.py`/`email.py` is `$`; should be `€`
+- [ ] Backend: order total currency symbol in `printer.py` is `$`; should be `€`
 - [ ] Backend: `GET /api/orders/{id}` returns a tuple on 404 instead of a real 404 response (pre-existing)
 - [ ] Monitoring: alert if push sending fails repeatedly (Vercel function logs or email)
 
@@ -51,5 +51,5 @@ Neon Postgres resource `happy-gate-db` added, Render removed from the code.
 - [ ] Sound picker for the alert; repeat the alarm until a pending order is handled
 - [ ] Daily summary in History (count, revenue)
 - [ ] Delivery orders (backend currently pickup-only: `service_delivery=False`)
-- [ ] SMS to customer on ready (Resend email only today)
+- [ ] SMS to customer on accept (Resend email only today)
 - [ ] Unit tests for `EscPosTicket` layout and `OrdersViewModel` actions

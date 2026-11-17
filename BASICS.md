@@ -25,7 +25,7 @@ Customer phone/laptop          Backend (Vercel)              Owner's Android pho
 ```
 
 If the owner does nothing for 3 minutes the backend auto-rejects the order (`rejected_timeout`).
-Reject with a reason gives `rejected_manual`. The customer is emailed on approve, reject and ready
+Reject with a reason gives `rejected_manual`. The customer is emailed on approve and reject
 (when `RESEND_API_KEY` is set on the backend).
 
 ## Order states
