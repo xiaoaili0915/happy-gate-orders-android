@@ -1,18 +1,31 @@
 # TODO
 
-## Blocking before first real use
+## Where we are (2026-11-17)
 
-- [ ] **Compile the app** in Android Studio (not yet built anywhere; fix any compile errors)
-- [ ] **Commit** both repos (backend changes in `happy-gate-food-ordering`, initial commit here)
-- [ ] **Deploy backend** on Vercel with Neon Postgres; set env vars (`KITCHEN_TOKEN`, Resend, `RESTAURANT_TIMEZONE=Europe/Amsterdam`) and run the one-off menu seed endpoint
-- [ ] **Firebase**: create project, add Android app `nl.happygate.orders`, put `google-services.json` in `app/`,
-      set `FIREBASE_CREDENTIALS` (service-account JSON) on Vercel
-- [ ] **Printer**: confirm exact Epson model and that it is LAN/Wi‑Fi; give it a fixed IP on the router;
-      run Settings → *Test print* from the phone
-- [ ] **Phone setup**: allow notifications, "New orders" channel sound on, battery optimisation off,
-      consider Do Not Disturb exception
-- [ ] End-to-end test: order on the website → phone rings → accept 30 min → website shows time →
-      ticket prints → mark ready → website shows ready
+Done: backend API + tests, Android app written, both repos on GitHub (`xiaoaili0915`), Vercel project created,
+Neon Postgres resource `happy-gate-db` added, Render removed from the code.
+
+## Next steps, in order
+
+1. [ ] **Vercel: finish the deploy** (owner)
+   - Project → Settings → Environment Variables: `KITCHEN_TOKEN` (long random string), `RESEND_API_KEY`,
+     `RESTAURANT_EMAIL`, `FROM_EMAIL`, `RESTAURANT_TIMEZONE=Europe/Amsterdam`. `DATABASE_URL` is already injected by Neon.
+   - Redeploy, then note the project URL (`https://….vercel.app`). The default name `happy-gate-food-ordering.vercel.app`
+     returned DEPLOYMENT_NOT_FOUND, so the real URL is different or the first deploy has not run yet.
+   - Check that the GitHub repo is connected so pushes to `master` deploy automatically.
+2. [ ] **Seed the menu once** into the fresh database (Claude can run this once given URL + token):
+   `curl -X POST -H "Authorization: Bearer $KITCHEN_TOKEN" https://<url>/api/restaurant/admin/seed-menu`
+3. [ ] **Smoke test the backend**: `/` shows the menu, `/kitchen?token=…` opens, `/api/restaurant/ping` returns `ok`
+4. [ ] **Delete or suspend the old Render web service** in the Render dashboard (code no longer supports it)
+5. [ ] **Compile the app** in Android Studio (never built anywhere yet; report compile errors to fix)
+6. [ ] **Connect the app**: Vercel URL + `KITCHEN_TOKEN`; allow notifications
+7. [ ] **Firebase** (background alerts): create project, add Android app `nl.happygate.orders`, put
+   `google-services.json` in `app/`, rebuild; set `FIREBASE_CREDENTIALS` (service-account JSON) on Vercel and redeploy
+8. [ ] **Printer**: confirm exact Epson model and that it is LAN/Wi‑Fi; give it a fixed IP on the router;
+   Settings → *Test print* from the phone on the restaurant Wi‑Fi
+9. [ ] **Phone setup**: "New orders" channel sound on, battery optimisation off for the app, consider a Do Not Disturb exception
+10. [ ] **End-to-end test**: order on the website → phone rings → accept 30 min → customer email shows the time →
+    ticket prints → mark ready → customer email "ready"
 
 ## Hardening (plan phase 5)
 
