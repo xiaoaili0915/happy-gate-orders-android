@@ -51,11 +51,11 @@ Push notifications (optional but recommended):
    download `google-services.json` into `app/`. The Gradle build picks it up
    automatically; without it the app builds and polls while open, but gets no background alerts.
 2. In Firebase → Project settings → Service accounts, generate a private key and set
-   `FIREBASE_CREDENTIALS` on the backend (Render: paste the JSON as the env value).
+   `FIREBASE_CREDENTIALS` on the backend (Vercel: paste the JSON as the env value and redeploy).
 
 ## Using the app
 
-- **Connect:** server URL (the Render URL) and the `KITCHEN_TOKEN`. Allow notifications when asked.
+- **Connect:** server URL (the Vercel URL, `https://….vercel.app`) and the `KITCHEN_TOKEN`. Allow notifications when asked.
 - **New:** every pending order with its 3‑minute countdown. Tap *Accept* → pick 15/30/45 or custom
   minutes → the customer page/email shows the confirmed time. *Reject* asks for a reason.
 - **Active:** accepted orders sorted by ready time, late ones highlighted. *Mark ready*, then *Picked up*.

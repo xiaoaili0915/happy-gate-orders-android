@@ -4,13 +4,13 @@ Two projects, one restaurant:
 
 | Project | Folder | What it is |
 | --- | --- | --- |
-| Website + backend | `happy-gate-food-ordering` | Python/FastAPI site where customers order; SQLite database; deployed on Render via Docker |
+| Website + backend | `happy-gate-food-ordering` | Python/FastAPI site where customers order; Neon Postgres database; deployed on Vercel |
 | Restaurant app | `happy-gate-orders-android` (this repo) | Kotlin/Jetpack Compose app on the owner's Android phone |
 
 ## The flow of one order
 
 ```
-Customer phone/laptop          Backend (Render)              Owner's Android phone        Epson printer
+Customer phone/laptop          Backend (Vercel)              Owner's Android phone        Epson printer
 ---------------------          ----------------              ---------------------        -------------
 1. Picks dishes, checks out -> 2. Saves order as PENDING
                                3. Sends FCM push --------->  4. Phone rings, shows order

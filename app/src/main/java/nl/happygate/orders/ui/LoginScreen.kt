@@ -32,7 +32,7 @@ import nl.happygate.orders.data.normaliseBaseUrl
 
 @Composable
 fun LoginScreen(viewModel: OrdersViewModel) {
-    var url by rememberSaveable { mutableStateOf("https://happy-gate-food-ordering.onrender.com") }
+    var url by rememberSaveable { mutableStateOf("https://") }
     var token by rememberSaveable { mutableStateOf("") }
     var error by rememberSaveable { mutableStateOf<String?>(null) }
     var busy by rememberSaveable { mutableStateOf(false) }
